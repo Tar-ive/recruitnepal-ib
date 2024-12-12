@@ -1,54 +1,71 @@
+import os
+from pathlib import Path
+
 class Parameters:
     """
-    Configurable parameters for the application.
+    Configurable parameters for RecruitNepal's AI Interview Bot.
     """
 
-    MODEL = "gpt-3.5-turbo"  # OpenAI model name
-
-    QUESTIONS_PROMPT = "Job description: {job_description}\nBased on the given job description, kindly formulate five relevant interview questions with max 20 words each. These questions should aim to assess the candidate's competency for the job role. Ask one question at a time. Do not generate unnecessary texts except the questions. "
+    MODEL = "gpt-4o-mini"
+    REPORTS_DIR = Path("interview_reports")
+    REPORTS_DIR.mkdir(exist_ok=True)
     
+    MAX_QUESTIONS = 7
+    QUESTIONS_PER_SECTION = 3
+
+    INITIAL_GREETING = """
+    Hello! I'm the AI interviewer for RecruitNepal. Before we begin the interview, 
+    could you please tell me your name?
+    """
+
+    SECTIONS = {
+        "technical": "Technical Skills and Experience",
+        "behavioral": "Work Style and Cultural Fit",
+        "situational": "Problem Solving and Decision Making"
+    }
+
+    QUESTIONS_PROMPT = """
+    Create exactly 3 interview questions for the {section} section. Questions should be:
+    - Clear and concise (max 20 words each)
+    - Specific to the section theme
+    - Designed to assess candidate qualifications
+    
+    Format as a simple numbered list (1., 2., 3.)
+    Return ONLY the questions, no additional text.
+    """
+
     EVALUATION_PROMPT = """
-                        Job description: {job_description}
+    Evaluate the candidate based on their responses:
 
-                        Question-Answers:\n{interview_text}
+    Candidate Name: {name}
+    Interview Responses:
+    {interview_text}
 
-                        As an AI interview assistant, your task is to evaluate the quality and depth of the candidate's responses. Consider the following:
+    Provide a concise evaluation covering:
+    1. Technical Competency
+    2. Cultural Fit
+    3. Problem-Solving Ability
+    4. Overall Recommendation (Proceed/Need More Information/Not Suitable)
 
-                        Does the candidate provide detailed answers that demonstrate their understanding and expertise?
-                        Can you find tangible examples in their responses that relate to the job description?
-                        Does the candidate elaborate on how they have used necessary skills or experiences to overcome challenges or achieve results?
-                        Do the responses suggest the candidate has the ability to perform well in the role's complexities and challenges?
-                        If the candidate's responses are inadequate, vague, or don't clearly demonstrate the needed skills or experiences, they may not be a suitable match for the role. In such cases, tactfully communicate this by saying: "Thank you for your responses. However, based on the answers provided, it appears there may be a misalignment with the requirements of the role we're seeking to fill. At this time, we cannot extend an offer. We appreciate your time and effort and wish you the best in your future endeavors."
+    Keep the evaluation constructive and actionable.
+    """
 
-                        If the responses indicate a strong fit for the role, then acknowledge the candidate's suitability by saying: "Thank you for your thoughtful responses. Based on your answers, it appears that your skills, experience, and understanding align well with the requirements of the role. We will be in touch with the next steps."
-                        """    
-    
-    JOB_DESCRIPTION = """
-                        Job description of advertised OpenAI Technical Expert / Data Scientist position:
+    REPORT_TEMPLATE = """# Candidate Interview Report
+Generated: {timestamp}
 
-                        TASKS:
-                        Development and implementation of Machine Learning / Artificial Intelligence models for applications, e.g. in the area of Natural Language Processing or Computer Vision, with a focus on OpenAI technologies to improve our services and processes
+## Candidate Information
+- Name: {name}
+- Interview Date: {date}
 
-                        Collaborate closely with other Data Scientists, subject matter experts, and external service providers
+## Interview Questions and Responses
+{interview_text}
 
-                        Use case-based evaluation and consulting on the use of analytical methods and approaches (especially OpenAI technologies) to improve our processes and services
+## AI Evaluation
+{evaluation}
 
-                        Collaborate closely with our business units as an internal development partner, supporting them from the ideation phase to implementation
+## Final Recommendation
+{recommendation}
 
-                        QUALIFICATIONS:
-                        Master in computer science, mathematics, physics or a comparable qualification with a focus on Machine Learning / AI.
-
-                        At least three years of experience in implementing Machine Learning / AI models, including the use of OpenAI technologies
-
-                        In-depth expertise in the area of current Machine Learning / AI methods, especially Large Language Models
-
-                        Comprehensive knowledge of relevant programming languages, including Python
-
-                        Experience with cloud computing platforms, preferably Azure
-
-                        Knowledge of natural language processing and/or computer vision
-
-                        Strong analytical skills and the ability to solve complex problems
-
-                        Strong English communication skills are required, and basic knowledge of German is preferred
-                        """
+---
+Generated by RecruitNepal AI Interview Bot
+"""
