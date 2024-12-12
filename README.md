@@ -1,104 +1,83 @@
-# AI Interview Chatbot
-## Table of Content
+# RecruitNepal Interview Bot
 
-- Overview
-- Technical Aspect
-- Installation
-- Troubleshooting
-- Directory Tree
-- Bug / Feature Request
-- Technologies Used
+An intelligent interview bot designed to help with recruitment processes. This bot conducts automated technical interviews, assesses candidates' responses, and provides detailed feedback.
 
-## Overview
-This project is an Interview Chatbot created using OpenAI's GPT-3.5 and the Streamlit framework. The chatbot generates job-specific interview questions and evaluates the candidate's responses. This is achieved using a sequence of prompts that leverage the language model's capabilities in creating questions and evaluating responses.
+## Features
 
+- Automated technical interviews
+- Real-time response assessment
+- Multiple programming language support
+- Customizable question bank
+- Detailed candidate evaluation reports
 
-https://github.com/nehalvaghasiya/interview-bot/assets/78668871/514c7ac2-c2e8-4e60-a4f4-2dd76bd30edd
+## Prerequisites
 
-
-## Technical Aspect
-The Interview Chatbot project is primarily divided into two parts:
-
-1. The generation of job-specific interview questions.
-2. Evaluation of the candidate's responses to the questions.
-
-Both tasks are accomplished using OpenAI's GPT-3.5 language model. The project uses Streamlit to create a simple and user-friendly web interface for the chatbot.
+- Python 3.8 or higher
+- Git
+- Virtual environment (recommended)
 
 ## Installation
 
-The installation steps are different for different OS.
-
-### Linux:
-
+1. Clone the repository
 ```bash
-python3.8 --version
-apt install python3.8-venv
-python3 -m venv myenv
-source myenv/bin/activate
+git clone https://github.com/Tar-ive/recruitnepal-ib.git
+cd recruitnepal-ib
+```
+
+2. Create and activate virtual environment
+```bash
+python -m venv myenv
+source myenv/bin/activate  # On Windows use: myenv\Scripts\activate
+```
+
+3. Install dependencies
+```bash
 pip install -r requirements.txt
-export OPENAI_API_KEY=<your secret key>
-streamlit run chatbot.py
 ```
 
-### Windows:
+## Usage
 
+1. Start the interview bot:
 ```bash
-python3.8 -m venv myenv
-myenv\Scripts\activate
-pip install -r requirements.txt
-export OPENAI_API_KEY=<your secret key>
-streamlit run chatbot.py
+python main.py
 ```
 
-### Mac:
+2. Follow the prompts to:
+   - Configure interview settings
+   - Select question categories
+   - Begin the interview session
 
-```bash
-python3.8 -m venv myenv
-source myenv/bin/activate
-pip install -r requirements.txt
-export OPENAI_API_KEY=<your secret key>
-streamlit run chatbot.py
+## Project Structure
+
 ```
-
-Remember to replace `<your secret key>` with your actual OpenAI API Key.
-
-
-## Troubleshooting
-
-If you encounter errors while installing the dependencies from `requirements.txt`, try installing the packages individually using the following commands:
-
-```bash
-pip install openai
-pip install streamlit
-pip install streamlit-chat
-```
-
-Then, export your OpenAI API Key and run the chatbot:
-```bash
-export OPENAI_API_KEY=<your secret key>
-streamlit run chatbot.py
-```
-Remember to replace `<your secret key>` with your actual OpenAI API Key.
-
-
-## Directory Tree
-```
-├── images
-│   ├── openai.png
-│   ├── streamlit.jpg
-├── .gitignore
-├── chatbot.py
-├── config.py
-├── utils.py
+recruitnepal-ib/
+├── myenv/
+├── src/
+│   ├── main.py
+│   ├── interview/
+│   └── utils/
+├── tests/
 ├── requirements.txt
 └── README.md
 ```
 
-## Bug / Feature Request
-If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue [here](https://github.com/nehalvaghasiya/interview-bot/issues/new) by including your search query and the expected result.
+## Contributing
 
-If you'd like to request a new function, feel free to do so by opening an issue [here](https://github.com/nehalvaghasiya/interview-bot/issues/new). Please include sample queries and their corresponding results.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Create a new Pull Request
 
-## Technologies Used
+## License
 
-<img src="images/openai.png" width="125"/><img src="images/streamlit.jpg" width="210"/> 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- Project Link: [https://github.com/Tar-ive/recruitnepal-ib](https://github.com/Tar-ive/recruitnepal-ib)
+
+## Acknowledgments
+
+- Thanks to all contributors who have helped shape this project
+- Special thanks to the RecruitNepal community
